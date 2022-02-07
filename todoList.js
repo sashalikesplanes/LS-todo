@@ -99,6 +99,14 @@ class TodoList {
   forEach(callback) {
     this.todos.forEach(callback);
   }
+
+  filter(callback) {
+    const newTodoList = new TodoList(this.title);
+    this.todos.forEach((todo) => {
+      if (callback(todo)) newTodoList.add(todo);
+    });
+    return newTodoList;
+  }
 }
 
 let todo1 = new Todo("Buy milk");
@@ -115,5 +123,9 @@ list.add(todo3);
 list.add(todo4);
 list.add(todo5);
 list.add(todo6);
+todo1.markDone();
+todo5.markDone();
 
-list.forEach((todo) => console.log(todo.toString()));
+let doneTodos = list.filter((todo) => todo.isDone());
+console.log(doneTodos);
+console.log(list.filter((todo) => todo.isDone()).first());
