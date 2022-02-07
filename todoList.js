@@ -95,4 +95,25 @@ class TodoList {
     const list = this.todos.map((todo) => String(todo)).join("\n");
     return `${title}\n${list}`;
   }
+
+  forEach(callback) {
+    this.todos.forEach(callback);
+  }
 }
+
+let todo1 = new Todo("Buy milk");
+let todo2 = new Todo("Clean room");
+let todo3 = new Todo("Go to the gym");
+let todo4 = new Todo("Go shopping");
+let todo5 = new Todo("Feed the cats");
+let todo6 = new Todo("Study for Launch School");
+let list = new TodoList("Today's Todos");
+
+list.add(todo1);
+list.add(todo2);
+list.add(todo3);
+list.add(todo4);
+list.add(todo5);
+list.add(todo6);
+
+list.forEach((todo) => console.log(todo.toString()));
