@@ -162,5 +162,34 @@ describe("TodoList", () => {
         })
       ).toEqual(testTodoList);
     });
+
+    test("allDone returns all the done todos", () => {
+      const testTodoList = new TodoList(list.title);
+      testTodoList.add(todo1);
+      todo1.markDone();
+      expect(list.allDone()).toEqual(testTodoList);
+    });
+
+    test("allNotDone returns all the undone todos", () => {
+      const testTodoList = new TodoList(list.title);
+      testTodoList.add(todo2);
+      testTodoList.add(todo3);
+      todo1.markDone();
+      expect(list.allNotDone()).toEqual(testTodoList);
+    });
+
+    test("markAllUndone marks all todos as undone", () => {
+      todo1.markDone();
+      todo3.markDone();
+      list.markAllUndone();
+      expect(todo1.isDone()).toBe(false);
+      expect(todo2.isDone()).toBe(false);
+    });
+
+    test("mark done does nothing if the title is not in the list", () => {
+      const testList = { ...list };
+      list.markDone("non existent todo");
+      expect(list).toEqual(testList);
+    });
   });
 });
